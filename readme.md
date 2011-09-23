@@ -78,7 +78,9 @@ Bourbon aims to provide support for CSS3 properties that are not yet fully suppo
 * Opera 10+
 * IE 9+
 
-Bourbon does not intend to support IE filters.
+*Bourbon does not intend to support IE filters.*
+
+Resources for checking browser support: [MDN - Moz Dev Network](https://developer.mozilla.org/en-US/), [Mozilla CSS Extensions](https://developer.mozilla.org/en/CSS_Reference/Mozilla_Extensions), [Webkit CSS Properties](http://css-infos.net/properties/webkit.php), [Firefox CSS Properties](http://css-infos.net/properties/firefox.php), [MSDN - Microsoft Dev Network](http://msdn.microsoft.com/en-us/library/ms531207(v=VS.85).aspx)
 
 
 # Using Bourbon Mixins
@@ -125,7 +127,7 @@ box-shadow supports single or multiple arguments:
 
     @include box-shadow(1px 1px 2px 0 #ff0000);
 
-    # Multiple arguments must be comma-diliminated.
+    # Multiple arguments must be comma-delimited.
     @include box-shadow(1px 1px 2px 0 #fff0000, -1px -2px 0 #ccc);
 
 
@@ -308,6 +310,26 @@ Create beautiful buttons by defining a style and color argument; using a single 
     }
 
 
+### HTML5 Input Types
+This addon generates a variable which contains a list of all html5 input types that render as text-based inputs, excluding textarea.
+In other words, it allows for easy targeting of all inputs that mimick input[type="text"].
+
+    input[type="*"]
+    * = [color, date, datetime, datetime-local, email, month, number, password, search, tel, text, time, url, week]
+
+
+Usage Note: You must use interpolation with the variable.
+
+    #{$all-text-inputs}, textarea {
+      border: 1px solid green;
+    }
+
+    Output:
+    input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"], textarea {
+      border: 1px solid green;
+    }
+
+
 ### Timing functions
 These CSS cubic-bezier timing functions are variables that can be used with CSS3 animations. The provided timing functions are the same as the jQuery UI demo: [easing functions](http://jqueryui.com/demos/effect/easing.html).
 
@@ -377,6 +399,7 @@ These CSS cubic-bezier timing functions are variables that can be used with CSS3
     #Addons
     --------------------------------
     @ button(*args)
+      #{$all-text-inputs}
     @ position(*args)
       timing-functions ($ease-in-*, $ease-out-*, $ease-in-out-*)
 
